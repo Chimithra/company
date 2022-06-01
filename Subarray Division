@@ -21,15 +21,6 @@ class Result {
     public static int birthday(List<Integer> s, int d, int m) {
     // Write your code here
      int a=0, count=0;
-    if(s.size()==1){
-        if(s.get(0) == d){
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-    else{
     for(int i=0 ; i<=s.size()-m; i++){
         for(int j=i; j<m+i; j++){
             a += s.get(j);
@@ -38,7 +29,6 @@ class Result {
             count++;
         }
         a = 0;
-    }
     }
     return count;
     }
