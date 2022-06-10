@@ -1,0 +1,85 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'designerPdfViewer' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. INTEGER_ARRAY h
+     *  2. STRING word
+     */
+
+    public static int designerPdfViewer(List<Integer> h, String word) {
+    // Write your code here
+    ArrayList<Character>arr = new ArrayList<>();
+    ArrayList<Character>arr1 = new ArrayList<>();
+    ArrayList<Integer>num = new ArrayList<>();
+    for(int i='a'; i<='z'; i++){
+        char c = (char)i;
+        arr.add(c);
+        for(int j=0; j<word.length(); j++){
+            if(c == word.charAt(j)){
+                arr1.add(c);
+            }
+        }
+    }
+    for(int j=0; j<26 ; j++){
+        for(int i=0; i<word.length(); i++){
+            if(arr.get(j) == word.charAt(i)){
+                num.add(h.get(j));
+            }
+        }
+    }
+    Collections.sort(num);
+    int greater = num.get(num.size()-1);
+    /*for(int k=0; k<num.size()-1; k++){
+        if(num.get(k)<num.get(k+1)){
+            greater = num.get(k+1);
+        }
+        else{
+            greater = num.get(k);
+        }
+    }*/
+    int area = greater * word.length();
+    /*System.out.println(arr.toString());
+    System.out.println(arr1.toString());
+    System.out.println(num.toString());*/
+    return area;
+
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] hTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> h = new ArrayList<>();
+
+        for (int i = 0; i < 26; i++) {
+            int hItem = Integer.parseInt(hTemp[i]);
+            h.add(hItem);
+        }
+
+        String word = bufferedReader.readLine();
+
+        int result = Result.designerPdfViewer(h, word);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
